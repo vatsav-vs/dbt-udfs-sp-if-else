@@ -1,6 +1,6 @@
 {%macro tbl_func()%}
 {%set sql%}
-    CREATE OR REPLACE FUNCTION TEST_TBL_FUNC1 (ODATE DATE, AMT FLOAT)
+    CREATE OR REPLACE FUNCTION TOP_ORDER_DTLS_FUNC (ODATE DATE, AMT FLOAT)
     RETURNS TABLE (ORDER_NUM INT,
               CUST_ID INT,
               SA_ID INT,
@@ -15,7 +15,7 @@
     FROM
     {{ source('sales', 'ORDERS') }}
     WHERE ORDER_DATE = ODATE
-    AND PURCHASE_AMT >=AMT
+    AND PURCHASE_AMT >AMT
     $$
 {%endset%}
 {% do run_query(sql) %}
